@@ -81,7 +81,7 @@ const faqs = [
   { q: "E se eu não gostar?", a: "Você tem 7 dias de garantia incondicional. Se não amar, devolvemos 100% do seu dinheiro, sem perguntas." },
 ];
 
-const buyers = [
+const buyers: [string, string][] = [
   ["Mariana S.", "São Paulo - SP"], ["Carla M.", "Rio de Janeiro - RJ"], ["Fernanda L.", "Belo Horizonte - MG"],
   ["Patrícia A.", "Salvador - BA"], ["Luciana P.", "Curitiba - PR"], ["Renata G.", "Recife - PE"],
   ["Adriana C.", "Fortaleza - CE"], ["Simone B.", "Porto Alegre - RS"], ["Vanessa O.", "Goiânia - GO"],
@@ -98,7 +98,7 @@ function SalesPopup() {
     }, 6000);
     return () => { clearTimeout(first); clearInterval(iv); };
   }, []);
-  const [name, city] = buyers[i];
+  const [name, city] = buyers[i]!;
   const mins = (i % 6) + 1;
   return (
     <div className={`fixed bottom-24 left-3 z-40 max-w-[18rem] transition-all duration-500 sm:bottom-5 sm:left-5 ${show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}>
