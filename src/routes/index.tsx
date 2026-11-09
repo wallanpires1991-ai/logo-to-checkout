@@ -144,16 +144,16 @@ function Index() {
       </div>
 
       {/* Hero */}
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-10 lg:grid-cols-[1.1fr_1fr] lg:pt-16">
-        <div className="order-2 text-center lg:order-1 lg:text-left">
+      <section className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-5 pb-16 pt-10 lg:grid-cols-[1.1fr_1fr] lg:pt-16">
+        <div className="order-2 min-w-0 text-center lg:order-1 lg:text-left">
           <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-black uppercase tracking-wider text-primary">
             O Segredo da Cozinha Prática e Saborosa
           </span>
-          <h1 className="mt-5 font-display text-4xl font-black leading-[1.08] text-secondary sm:text-5xl">
+          <h1 className="mt-5 font-display text-[2rem] font-black leading-[1.1] text-secondary sm:text-5xl">
             Transforme sua Air Fryer na sua <span className="text-primary">melhor aliada</span>: 150 Receitas Caseiras Irresistíveis{" "}
-            <span className="relative inline-block whitespace-nowrap">
-              <span className="relative z-10">+ 30 Fitness de Brinde!</span>
-              <span className="absolute inset-x-0 bottom-1 -z-0 h-3 rounded bg-accent/70" />
+            <span className="relative inline">
+              <span className="rounded bg-accent/70 px-1 [box-decoration-break:clone]">+ 30 Fitness de Brinde!</span>
+              <span className="hidden" />
             </span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground lg:mx-0">
@@ -168,7 +168,7 @@ function Index() {
         <div className="relative order-1 mx-auto w-full max-w-md lg:order-2">
           <div className="absolute inset-6 rounded-full bg-primary/25 blur-3xl" />
           <img src={logo.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" className="float-soft relative w-full rounded-[2rem] shadow-2xl" />
-          <div className="absolute -right-2 top-6 rotate-6 rounded-2xl bg-accent px-4 py-2 text-center font-display font-black leading-tight text-accent-foreground shadow-lg">
+          <div className="absolute right-1 top-6 rotate-6 rounded-2xl bg-accent px-4 py-2 text-center font-display font-black leading-tight text-accent-foreground shadow-lg">
             <span className="block text-xs uppercase">de R$97</span>por R$19,90
           </div>
         </div>
