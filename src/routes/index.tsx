@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import logo from "@/assets/vovo-dita-logo.png.asset.json";
 import openingImage from "@/assets/vovo-dita-receitas-inicio.png.asset.json";
+import offerImage from "@/assets/vovo-dita-caderninho-oferta.png.asset.json";
 import camila from "@/assets/camila.jpg";
 import juliana from "@/assets/juliana.jpg";
 import beatriz from "@/assets/beatriz.jpg";
@@ -263,7 +264,7 @@ function Index() {
         <div className="mx-auto max-w-lg overflow-hidden rounded-[2rem] bg-card shadow-2xl">
           <div className="bg-secondary px-4 py-4 text-secondary-foreground sm:px-6"><Countdown /></div>
           <div className="px-5 py-6 text-center sm:p-9">
-            <img src={logo.url} alt="" loading="lazy" className="mx-auto -mt-2 w-44 rounded-2xl shadow-lg" />
+            <img src={offerImage.url} alt="Vovó Dita mostrando seu caderninho de receitas para Air Fryer" loading="lazy" width={1312} height={1199} className="mx-auto h-auto w-full max-w-sm rounded-2xl object-contain" />
             <ul className="mx-auto mt-6 space-y-3 text-left">
               {["E-book com 150 Receitas Caseiras da Vovó", "Bônus: 30 Receitas Fitness para Air Fryer", "Acesso Vitalício + Atualizações", "Leia no celular ou imprima em casa", "Garantia incondicional de 7 dias"].map((x) => (
                 <li key={x} className="flex items-start gap-3 font-semibold"><span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-success text-success-foreground"><Check className="h-4 w-4" /></span>{x}</li>
