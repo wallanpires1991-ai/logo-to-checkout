@@ -167,7 +167,9 @@ function Index() {
         </div>
         <div className="relative order-1 mx-auto w-full max-w-md lg:order-2">
           <div className="absolute inset-6 rounded-full bg-primary/25 blur-3xl" />
-          <img src={logo.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" className="float-soft relative w-full rounded-[2rem] shadow-2xl" />
+          <div className="float-soft relative will-change-transform">
+            <img src={logo.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" className="w-full rounded-[2rem] shadow-2xl" />
+          </div>
           <div className="absolute right-1 top-6 rotate-6 rounded-2xl bg-accent px-4 py-2 text-center font-display font-black leading-tight text-accent-foreground shadow-lg">
             <span className="block text-xs uppercase">de R$97</span>por R$17,97
           </div>
