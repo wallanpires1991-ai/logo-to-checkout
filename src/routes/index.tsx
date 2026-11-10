@@ -169,7 +169,7 @@ function Index() {
           <div className="absolute inset-6 rounded-full bg-primary/25 blur-3xl" />
           <img src={logo.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" className="float-soft relative w-full rounded-[2rem] shadow-2xl" />
           <div className="absolute right-1 top-6 rotate-6 rounded-2xl bg-accent px-4 py-2 text-center font-display font-black leading-tight text-accent-foreground shadow-lg">
-            <span className="block text-xs uppercase">de R$97</span>por R$19,90
+            <span className="block text-xs uppercase">de R$97</span>por R$17,97
           </div>
         </div>
       </section>
@@ -249,7 +249,7 @@ function Index() {
             </ul>
             <div className="my-7 border-t-2 border-dashed border-border pt-6">
               <p className="text-muted-foreground">De <span className="line-through">R$ 97,00</span> por apenas</p>
-              <p className="font-display text-6xl font-black text-primary"><span className="align-top text-2xl">R$</span>19,90</p>
+              <p className="font-display text-6xl font-black text-primary"><span className="align-top text-2xl">R$</span>17,97</p>
               <p className="text-sm font-bold text-muted-foreground">pagamento único · menos que uma pizza 🍕</p>
             </div>
             <CTA>QUERO MEU CADERNINHO AGORA</CTA>
