@@ -1,3 +1,3 @@
 - [x] Optimize uploaded product images and retry temporary loading failures.
 - [x] Preserve the page colors when a phone uses dark mode.
-- [ ] Verify images and colors on mobile and desktop.
+- [x] Verify images and colors on mobile and desktop.
