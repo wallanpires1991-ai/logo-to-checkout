@@ -4,9 +4,12 @@ import {
   Zap, ShoppingBasket, ListChecks, Infinity as InfinityIcon, Star, Gift, ShieldCheck,
   Lock, Check, ChevronDown, Flame, Clock, Drumstick, Cake, Beef, Salad, Croissant, Fish, Heart,
 } from "lucide-react";
-import logo from "@/assets/vovo-dita-logo-leve.jpg.asset.json";
-import openingImage from "@/assets/vovo-dita-inicio-leve.jpg.asset.json";
-import offerImage from "@/assets/vovo-dita-oferta-leve.jpg.asset.json";
+import logoSrc from "@/assets/vovo-dita-logo-leve.jpg";
+const logo = { url: logoSrc };
+import openingImageSrc from "@/assets/vovo-dita-inicio-leve.jpg";
+const openingImage = { url: openingImageSrc };
+import offerImageSrc from "@/assets/vovo-dita-oferta-leve.jpg";
+const offerImage = { url: offerImageSrc };
 import { ProductImage } from "@/components/product-image";
 import camila from "@/assets/camila.jpg";
 import juliana from "@/assets/juliana.jpg";
