@@ -144,6 +144,13 @@
   transform: translateZ(0);
   backface-visibility: hidden;
 }
+@utility bloom {
+  animation: bloom 2.4s ease-in-out infinite;
+}
+@keyframes bloom {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--destructive) 55%, transparent); }
+  50% { box-shadow: 0 0 0 12px transparent; }
+}
 @keyframes cta-pulse {
   0%, 100% { transform: scale(1); box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--success) 60%, transparent), 0 0 0 0 color-mix(in oklab, var(--success) 45%, transparent); }
   50% { transform: scale(1.03); box-shadow: 0 14px 34px -8px color-mix(in oklab, var(--success) 70%, transparent), 0 0 0 14px transparent; }

@@ -133,10 +133,23 @@ function Countdown() {
   const s = String(left % 60).padStart(2, "0");
   return (
     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:flex sm:justify-center sm:gap-3">
-      <span className="flex min-w-0 items-center gap-2 text-xs font-bold uppercase sm:text-sm"><Clock className="h-4 w-4 shrink-0 text-accent sm:h-5 sm:w-5" />Oferta expira em</span>
+      <span className="flex min-w-0 items-center gap-2 text-xs font-black uppercase sm:text-sm"><Clock className="h-4 w-4 shrink-0 text-destructive sm:h-5 sm:w-5" />Oferta expira em</span>
       <div className="flex shrink-0 items-center gap-1 font-display text-xl font-black tabular-nums sm:text-2xl">
-        <span className="rounded-lg bg-accent px-2 py-1 text-accent-foreground">{m}</span>:
-        <span className="rounded-lg bg-accent px-2 py-1 text-accent-foreground">{s}</span>
+        <span className="rounded-lg bg-destructive px-2 py-1 text-destructive-foreground">{m}</span>
+        <span className="text-destructive">:</span>
+        <span className="rounded-lg bg-destructive px-2 py-1 text-destructive-foreground">{s}</span>
+      </div>
+    </div>
+  );
+}
+
+function BlackFridaySeal({ className = "" }: { className?: string }) {
+  return (
+    <div className={`bloom grid shrink-0 place-items-center rounded-full border-4 border-dashed border-destructive bg-[#121212] px-4 py-3 text-center shadow-xl ${className}`}>
+      <div className="leading-none">
+        <span className="block font-display text-sm font-black uppercase leading-none tracking-tight text-destructive sm:text-base">Black</span>
+        <span className="block font-display text-sm font-black uppercase leading-none tracking-tight text-white sm:text-base">Friday</span>
+        <span className="mt-1 block text-[9px] font-black uppercase tracking-[0.16em] text-accent sm:text-[11px]">Novembro</span>
       </div>
     </div>
   );
@@ -197,8 +210,11 @@ function Index() {
           <div className="float-soft relative will-change-transform">
             <ProductImage src={openingImage.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" width={1021} height={571} fetchPriority="high" loading="eager" className="aspect-[1021/571] h-auto w-full object-contain" />
           </div>
-          <div className="relative mx-auto mt-3 w-fit rounded-xl bg-accent px-3 py-2 text-center font-display text-sm font-black leading-tight text-accent-foreground shadow-lg sm:px-4 sm:text-base">
-            <span className="block text-xs uppercase">de R$97</span>por R$17,97
+          <div className="relative mx-auto mt-3 flex w-fit items-center gap-3">
+            <BlackFridaySeal className="h-24 w-24 -rotate-6 sm:h-28 sm:w-28" />
+            <div className="rounded-xl bg-accent px-3 py-2 text-center font-display text-sm font-black leading-tight text-accent-foreground shadow-lg sm:px-4 sm:text-base">
+              <span className="block text-xs uppercase">de R$97</span>por R$29,90
+            </div>
           </div>
         </div>
       </section>
@@ -268,7 +284,7 @@ function Index() {
       {/* Offer */}
       <section id="oferta" className="gingham scroll-mt-4 px-4 py-12 sm:px-5 sm:py-20">
         <div className="mx-auto max-w-lg overflow-hidden rounded-[2rem] bg-card shadow-2xl">
-          <div className="bg-secondary px-4 py-4 text-secondary-foreground sm:px-6"><Countdown /></div>
+          <div className="bg-[#121212] px-4 py-4 text-white sm:px-6"><Countdown /></div>
           <div className="px-5 py-6 text-center sm:p-9">
             <ProductImage src={offerImage.url} alt="Vovó Dita mostrando seu caderninho de receitas para Air Fryer" loading="eager" width={1000} height={914} className="mx-auto h-auto w-full max-w-sm rounded-2xl object-contain" />
             <ul className="mx-auto mt-6 space-y-3 text-left">
@@ -277,8 +293,9 @@ function Index() {
               ))}
             </ul>
             <div className="my-7 border-t-2 border-dashed border-border pt-6">
+              <BlackFridaySeal className="mx-auto -mt-16 mb-4 h-28 w-28 rotate-6 sm:h-32 sm:w-32" />
               <p className="text-muted-foreground">De <span className="line-through">R$ 97,00</span> por apenas</p>
-              <p className="font-display text-6xl font-black text-primary"><span className="align-top text-2xl">R$</span>17,97</p>
+              <p className="font-display text-6xl font-black text-primary"><span className="align-top text-2xl">R$</span>29,90</p>
               <p className="text-sm font-bold text-muted-foreground">pagamento único · menos que uma pizza 🍕</p>
             </div>
             <CTA>QUERO MEU CADERNINHO AGORA</CTA>
