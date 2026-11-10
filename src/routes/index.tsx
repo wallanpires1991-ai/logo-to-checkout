@@ -174,7 +174,7 @@ function BlackFridaySeal({ className = "" }: { className?: string }) {
 
 function Index() {
   const [open, setOpen] = useState<number | null>(0);
-  const [showMobileOffer, setShowMobileOffer] = useState(false);
+  const [showSticky, setShowSticky] = useState(false);
   useEffect(() => {
     const hero = document.getElementById("inicio");
     const offer = document.getElementById("oferta");
@@ -186,7 +186,7 @@ function Index() {
         if (entry.target === hero) heroVisible = entry.isIntersecting;
         if (entry.target === offer) offerVisible = entry.isIntersecting;
       }
-      setShowMobileOffer(!heroVisible && !offerVisible);
+      setShowSticky(!heroVisible && !offerVisible);
     });
     observer.observe(hero);
     observer.observe(offer);
