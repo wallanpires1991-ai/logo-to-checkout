@@ -176,14 +176,16 @@ function Index() {
             O Segredo da Cozinha Prática e Saborosa
           </span>
           <h1 className="mt-4 text-balance font-display text-[1.625rem] font-black leading-[1.15] text-secondary sm:mt-5 sm:text-5xl">
-            Transforme sua Air Fryer na sua <span className="text-primary">melhor aliada</span>: 150 Receitas Caseiras Irresistíveis{" "}
-            <span className="relative inline">
-              <span className="rounded bg-accent/70 px-1 [box-decoration-break:clone]">+ 30 Fitness de Brinde!</span>
-              <span className="hidden" />
-            </span>
+            Sua Air Fryer faz sempre as <span className="text-primary">mesmas receitas</span>?
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-5 sm:text-lg lg:mx-0">
-            Resgate o verdadeiro sabor da comida caseira da vovó, de forma super prática, rápida e sem sujeira na cozinha.
+            Descubra novas ideias para preparar frango, batatas, petiscos, bolos, doces e refeições para a família.
+          </p>
+          <p className="mx-auto mt-3 max-w-xl text-base font-extrabold leading-snug text-secondary sm:text-lg lg:mx-0">
+            <span className="rounded bg-accent/70 px-1 [box-decoration-break:clone]">150 receitas caseiras + 30 receitas fitness de brinde.</span>
+          </p>
+          <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0">
+            Um caderninho digital para consultar sempre que faltar inspiração na cozinha.
           </p>
           <div className="mx-auto mt-4 grid w-fit max-w-full grid-cols-[auto_minmax(0,1fr)] items-center gap-2 sm:mt-6 lg:mx-0">
             <div className="flex shrink-0">{[camila, juliana, beatriz].map((s) => <img key={s} src={s} alt="" className="-ml-2 h-8 w-8 shrink-0 rounded-full border-2 border-card object-cover first:ml-0 sm:h-9 sm:w-9" />)}</div>
