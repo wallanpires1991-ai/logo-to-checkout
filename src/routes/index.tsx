@@ -9,8 +9,7 @@ import camila from "@/assets/camila.jpg";
 import juliana from "@/assets/juliana.jpg";
 import beatriz from "@/assets/beatriz.jpg";
 
-// 👉 Cole aqui o link do seu checkout de pagamento
-const CHECKOUT_URL = "#";
+const CHECKOUT_URL = "https://pay.cakto.com.br/uio4pcd_1304273";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -326,7 +325,7 @@ function Index() {
       <SalesPopup />
 
       {showMobileOffer && <div className="mobile-offer-bar fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 px-4 pt-3 backdrop-blur-sm sm:hidden">
-        <a href="#oferta" className="flex min-h-12 w-full items-center justify-center rounded-xl bg-success px-4 py-3 text-center text-sm font-black uppercase text-success-foreground">
+        <a href={CHECKOUT_URL} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-success px-4 py-3 text-center text-sm font-black uppercase text-success-foreground">
           Quero Minhas Receitas
         </a>
       </div>}
