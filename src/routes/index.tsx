@@ -4,9 +4,10 @@ import {
   Zap, ShoppingBasket, ListChecks, Infinity as InfinityIcon, Star, Gift, ShieldCheck,
   Lock, Check, ChevronDown, Flame, Clock, Drumstick, Cake, Beef, Salad, Croissant, Fish, Heart,
 } from "lucide-react";
-import logo from "@/assets/vovo-dita-logo.png.asset.json";
-import openingImage from "@/assets/vovo-dita-receitas-inicio.png.asset.json";
-import offerImage from "@/assets/vovo-dita-caderninho-oferta.png.asset.json";
+import logo from "@/assets/vovo-dita-logo-leve.jpg.asset.json";
+import openingImage from "@/assets/vovo-dita-inicio-leve.jpg.asset.json";
+import offerImage from "@/assets/vovo-dita-oferta-leve.jpg.asset.json";
+import { ProductImage } from "@/components/product-image";
 import camila from "@/assets/camila.jpg";
 import juliana from "@/assets/juliana.jpg";
 import beatriz from "@/assets/beatriz.jpg";
@@ -108,7 +109,7 @@ function SalesPopup() {
   return (
     <div className={`fixed bottom-5 left-5 z-40 hidden max-w-[18rem] transition-all duration-500 sm:block ${show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}>
       <div className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-xl">
-        <img src={logo.url} alt="" className="h-11 w-11 shrink-0 rounded-xl object-cover object-top" />
+        <ProductImage src={logo.url} alt="" className="h-11 w-11 shrink-0 rounded-xl object-cover object-top" />
         <div className="min-w-0 text-sm leading-tight">
           <p className="font-extrabold text-secondary">{name} de {city}</p>
           <p className="text-muted-foreground">comprou há {mins} minuto{mins > 1 ? "s" : ""}</p>
@@ -189,7 +190,7 @@ function Index() {
         </div>
         <div className="relative order-1 mx-auto w-full max-w-md lg:order-2 lg:max-w-xl">
           <div className="float-soft relative will-change-transform">
-            <img src={openingImage.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" width={1366} height={768} className="aspect-[1366/768] h-auto w-full object-contain" />
+            <ProductImage src={openingImage.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" width={1366} height={769} fetchPriority="high" loading="eager" className="aspect-[1366/769] h-auto w-full object-contain" />
           </div>
           <div className="relative mx-auto mt-3 w-fit rounded-xl bg-accent px-3 py-2 text-center font-display text-sm font-black leading-tight text-accent-foreground shadow-lg sm:px-4 sm:text-base">
             <span className="block text-xs uppercase">de R$97</span>por R$17,97
@@ -264,7 +265,7 @@ function Index() {
         <div className="mx-auto max-w-lg overflow-hidden rounded-[2rem] bg-card shadow-2xl">
           <div className="bg-secondary px-4 py-4 text-secondary-foreground sm:px-6"><Countdown /></div>
           <div className="px-5 py-6 text-center sm:p-9">
-            <img src={offerImage.url} alt="Vovó Dita mostrando seu caderninho de receitas para Air Fryer" loading="lazy" width={1312} height={1199} className="mx-auto h-auto w-full max-w-sm rounded-2xl object-contain" />
+            <ProductImage src={offerImage.url} alt="Vovó Dita mostrando seu caderninho de receitas para Air Fryer" loading="eager" width={1000} height={914} className="mx-auto h-auto w-full max-w-sm rounded-2xl object-contain" />
             <ul className="mx-auto mt-6 space-y-3 text-left">
               {["E-book com 150 Receitas Caseiras da Vovó", "Bônus: 30 Receitas Fitness para Air Fryer", "Acesso Vitalício + Atualizações", "Leia no celular ou imprima em casa", "Garantia incondicional de 7 dias"].map((x) => (
                 <li key={x} className="flex items-start gap-3 font-semibold"><span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-success text-success-foreground"><Check className="h-4 w-4" /></span>{x}</li>
@@ -312,7 +313,7 @@ function Index() {
 
       {/* Footer */}
       <footer className="bg-secondary px-5 pb-28 pt-12 text-center text-secondary-foreground sm:pb-12">
-        <img src={logo.url} alt="Vovó Dita" loading="lazy" className="mx-auto w-28 rounded-2xl" />
+        <ProductImage src={logo.url} alt="Vovó Dita" loading="lazy" className="mx-auto w-28 rounded-2xl" />
         <p className="mt-4 flex items-center justify-center gap-1 font-bold">Feito com <Heart className="h-4 w-4 fill-primary text-primary" /> pela Vovó Dita</p>
         <div className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs font-bold opacity-80">
           <span className="flex items-center gap-1"><Lock className="h-3.5 w-3.5" /> Site seguro</span>

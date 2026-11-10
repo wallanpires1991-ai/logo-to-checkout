@@ -30,3 +30,5 @@ use the editor.
 <!-- LOVABLE:END -->
 
 - Keep mobile purchase navigation hidden while the opening section or offer is visible, and suppress sales popups on mobile, so floating controls do not cover primary purchase content.
+- Serve uploaded product images as optimized JPEG asset pointers through ProductImage with bounded retries; this reduces download failures without substituting user artwork.
+- Declare an only-light color scheme in CSS and document metadata so device dark-mode preferences do not recolor the sales page.

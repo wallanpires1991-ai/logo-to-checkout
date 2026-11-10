@@ -81,6 +81,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "color-scheme", content: "only light" },
+      { name: "supported-color-schemes", content: "light" },
       { title: "Caderninho de Receitas da Vovó Dita" },
       { name: "description", content: "150 receitas caseiras para Air Fryer + 30 fitness de brinde." },
       { name: "author", content: "Lovable" },
