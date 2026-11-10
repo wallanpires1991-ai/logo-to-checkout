@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-function trackCheckoutStart() {
+export function trackCheckoutStart() {
   try {
     window.fbq?.("track", "InitiateCheckout", {
       value: 29.9,
@@ -39,10 +39,11 @@ function trackCheckoutStart() {
 
 // Fires the pixel event, then lets the browser leave for checkout a beat later so
 // the tracking request isn't cancelled by the page unloading.
-function handleCheckoutClick(e: React.MouseEvent<HTMLAnchorElement>) {
-  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-  e.preventDefault();
+export function handleCheckoutClick(e: React.MouseEvent<HTMLAnchorElement>) {
+  if (e.defaultPrevented) return;
   trackCheckoutStart();
+  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
   window.setTimeout(() => {
     window.location.href = CHECKOUT_URL;
   }, 250);
