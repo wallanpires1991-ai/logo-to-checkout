@@ -6,8 +6,7 @@ import {
 } from "lucide-react";
 import logoSrc from "@/assets/vovo-dita-logo-leve.jpg";
 const logo = { url: logoSrc };
-import openingImageSrc from "@/assets/vovo-dita-inicio-leve.jpg";
-const openingImage = { url: openingImageSrc };
+import openingImage from "@/assets/vovo-dita-hero-sem-fundo.png.asset.json";
 import offerImageSrc from "@/assets/vovo-dita-oferta-leve.jpg";
 const offerImage = { url: offerImageSrc };
 import { ProductImage } from "@/components/product-image";
@@ -191,9 +190,9 @@ function Index() {
           </div>
           <CTA className="mt-6 sm:mt-8 lg:items-start" />
         </div>
-        <div className="relative order-1 mx-auto w-full max-w-md lg:order-2 lg:max-w-xl">
+        <div className="relative order-1 mx-auto w-full max-w-md lg:order-2 lg:max-w-2xl">
           <div className="float-soft relative will-change-transform">
-            <ProductImage src={openingImage.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" width={1366} height={769} fetchPriority="high" loading="eager" className="aspect-[1366/769] h-auto w-full object-contain" />
+            <ProductImage src={openingImage.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" width={1021} height={571} fetchPriority="high" loading="eager" className="aspect-[1021/571] h-auto w-full object-contain" />
           </div>
           <div className="relative mx-auto mt-3 w-fit rounded-xl bg-accent px-3 py-2 text-center font-display text-sm font-black leading-tight text-accent-foreground shadow-lg sm:px-4 sm:text-base">
             <span className="block text-xs uppercase">de R$97</span>por R$17,97
