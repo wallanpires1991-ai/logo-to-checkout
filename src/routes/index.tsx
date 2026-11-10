@@ -123,21 +123,38 @@ function SalesPopup() {
   );
 }
 
-function Countdown() {
-  const [left, setLeft] = useState(15 * 60);
+const OFFER_WINDOW = 15 * 60;
+let offerEnd = Date.now() + OFFER_WINDOW * 1000;
+
+function useCountdown() {
+  const [left, setLeft] = useState(OFFER_WINDOW);
   useEffect(() => {
-    const iv = setInterval(() => setLeft((v) => (v <= 1 ? 15 * 60 : v - 1)), 1000);
+    const tick = () => {
+      let rem = Math.round((offerEnd - Date.now()) / 1000);
+      if (rem <= 0) { offerEnd = Date.now() + OFFER_WINDOW * 1000; rem = OFFER_WINDOW; }
+      setLeft(rem);
+    };
+    tick();
+    const iv = setInterval(tick, 1000);
     return () => clearInterval(iv);
   }, []);
+  return left;
+}
+
+function Countdown({ compact = false }: { compact?: boolean }) {
+  const left = useCountdown();
   const m = String(Math.floor(left / 60)).padStart(2, "0");
   const s = String(left % 60).padStart(2, "0");
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:flex sm:justify-center sm:gap-3">
-      <span className="flex min-w-0 items-center gap-2 text-xs font-black uppercase sm:text-sm"><Clock className="h-4 w-4 shrink-0 text-destructive sm:h-5 sm:w-5" />Oferta expira em</span>
-      <div className="flex shrink-0 items-center gap-1 font-display text-xl font-black tabular-nums sm:text-2xl">
-        <span className="rounded-lg bg-destructive px-2 py-1 text-destructive-foreground">{m}</span>
+    <div className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:flex sm:justify-center ${compact ? "sm:gap-2" : "sm:gap-3"}`}>
+      <span className={`flex min-w-0 items-center gap-2 font-black uppercase ${compact ? "text-[11px] sm:text-sm" : "text-xs sm:text-sm"}`}>
+        <Clock className={`shrink-0 text-destructive ${compact ? "h-3.5 w-3.5 sm:h-4 sm:w-4" : "h-4 w-4 sm:h-5 sm:w-5"}`} />
+        Oferta expira em
+      </span>
+      <div className={`flex shrink-0 items-center gap-1 font-display font-black tabular-nums ${compact ? "text-base sm:text-xl" : "text-xl sm:text-2xl"}`}>
+        <span className={`rounded-lg bg-destructive font-black text-destructive-foreground ${compact ? "px-1.5 py-0.5 sm:px-2 sm:py-1" : "px-2 py-1"}`}>{m}</span>
         <span className="text-destructive">:</span>
-        <span className="rounded-lg bg-destructive px-2 py-1 text-destructive-foreground">{s}</span>
+        <span className={`rounded-lg bg-destructive font-black text-destructive-foreground ${compact ? "px-1.5 py-0.5 sm:px-2 sm:py-1" : "px-2 py-1"}`}>{s}</span>
       </div>
     </div>
   );
@@ -157,7 +174,7 @@ function BlackFridaySeal({ className = "" }: { className?: string }) {
 
 function Index() {
   const [open, setOpen] = useState<number | null>(0);
-  const [showMobileOffer, setShowMobileOffer] = useState(false);
+  const [showSticky, setShowSticky] = useState(false);
   useEffect(() => {
     const hero = document.getElementById("inicio");
     const offer = document.getElementById("oferta");
@@ -169,7 +186,7 @@ function Index() {
         if (entry.target === hero) heroVisible = entry.isIntersecting;
         if (entry.target === offer) offerVisible = entry.isIntersecting;
       }
-      setShowMobileOffer(!heroVisible && !offerVisible);
+      setShowSticky(!heroVisible && !offerVisible);
     });
     observer.observe(hero);
     observer.observe(offer);
@@ -349,7 +366,11 @@ function Index() {
 
       <SalesPopup />
 
-      {showMobileOffer && <div className="mobile-offer-bar fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 px-4 pt-3 backdrop-blur-sm sm:hidden">
+      <div className={`fixed inset-x-0 top-0 z-40 border-b-2 border-destructive bg-[#121212] px-4 py-2 text-white shadow-xl transition-transform duration-300 sm:px-6 ${showSticky ? "translate-y-0" : "-translate-y-full"}`}>
+        <Countdown compact />
+      </div>
+
+      {showSticky && <div className="mobile-offer-bar fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 px-4 pt-3 backdrop-blur-sm sm:hidden">
         <a href={CHECKOUT_URL} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-success px-4 py-3 text-center text-sm font-black uppercase text-success-foreground">
           Quero Minhas Receitas
         </a>
