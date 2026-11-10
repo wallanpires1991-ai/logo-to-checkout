@@ -147,9 +147,9 @@ function BlackFridaySeal({ className = "" }: { className?: string }) {
   return (
     <div className={`bloom grid shrink-0 place-items-center rounded-full border-4 border-dashed border-destructive bg-[#121212] px-4 py-3 text-center shadow-xl ${className}`}>
       <div className="leading-none">
-        <span className="block font-display text-base font-black uppercase tracking-tight text-destructive sm:text-lg">Black</span>
-        <span className="block font-display text-base font-black uppercase tracking-tight text-white sm:text-lg">Friday</span>
-        <span className="mt-1 block text-[10px] font-black uppercase tracking-[0.2em] text-accent sm:text-xs">Novembro</span>
+        <span className="block font-display text-sm font-black uppercase leading-none tracking-tight text-destructive sm:text-base">Black</span>
+        <span className="block font-display text-sm font-black uppercase leading-none tracking-tight text-white sm:text-base">Friday</span>
+        <span className="mt-1 block text-[9px] font-black uppercase tracking-[0.16em] text-accent sm:text-[11px]">Novembro</span>
       </div>
     </div>
   );
@@ -211,7 +211,7 @@ function Index() {
             <ProductImage src={openingImage.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" width={1021} height={571} fetchPriority="high" loading="eager" className="aspect-[1021/571] h-auto w-full object-contain" />
           </div>
           <div className="relative mx-auto mt-3 flex w-fit items-center gap-3">
-            <BlackFridaySeal className="h-20 w-20 -rotate-6 sm:h-24 sm:w-24" />
+            <BlackFridaySeal className="h-24 w-24 -rotate-6 sm:h-28 sm:w-28" />
             <div className="rounded-xl bg-accent px-3 py-2 text-center font-display text-sm font-black leading-tight text-accent-foreground shadow-lg sm:px-4 sm:text-base">
               <span className="block text-xs uppercase">de R$97</span>por R$29,90
             </div>
@@ -293,7 +293,7 @@ function Index() {
               ))}
             </ul>
             <div className="my-7 border-t-2 border-dashed border-border pt-6">
-              <BlackFridaySeal className="mx-auto -mt-14 mb-4 h-24 w-24 rotate-6 sm:h-28 sm:w-28" />
+              <BlackFridaySeal className="mx-auto -mt-16 mb-4 h-28 w-28 rotate-6 sm:h-32 sm:w-32" />
               <p className="text-muted-foreground">De <span className="line-through">R$ 97,00</span> por apenas</p>
               <p className="font-display text-6xl font-black text-primary"><span className="align-top text-2xl">R$</span>29,90</p>
               <p className="text-sm font-bold text-muted-foreground">pagamento único · menos que uma pizza 🍕</p>
