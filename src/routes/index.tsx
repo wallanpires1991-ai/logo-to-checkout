@@ -366,7 +366,11 @@ function Index() {
 
       <SalesPopup />
 
-      {showMobileOffer && <div className="mobile-offer-bar fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 px-4 pt-3 backdrop-blur-sm sm:hidden">
+      <div className={`fixed inset-x-0 top-0 z-40 border-b-2 border-destructive bg-[#121212] px-4 py-2 text-white shadow-xl transition-transform duration-300 sm:px-6 ${showSticky ? "translate-y-0" : "-translate-y-full"}`}>
+        <Countdown compact />
+      </div>
+
+      {showSticky && <div className="mobile-offer-bar fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 px-4 pt-3 backdrop-blur-sm sm:hidden">
         <a href={CHECKOUT_URL} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-success px-4 py-3 text-center text-sm font-black uppercase text-success-foreground">
           Quero Minhas Receitas
         </a>
