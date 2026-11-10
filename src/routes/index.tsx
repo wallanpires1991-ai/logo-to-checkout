@@ -37,6 +37,17 @@ function trackCheckoutStart() {
   }
 }
 
+// Fires the pixel event, then lets the browser leave for checkout a beat later so
+// the tracking request isn't cancelled by the page unloading.
+function handleCheckoutClick(e: React.MouseEvent<HTMLAnchorElement>) {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  trackCheckoutStart();
+  window.setTimeout(() => {
+    window.location.href = CHECKOUT_URL;
+  }, 250);
+}
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -60,7 +71,7 @@ function CTA({ children = "QUERO GARANTIR MEU CADERNINHO AGORA", className = "" 
     <div className={`flex flex-col items-center gap-3 ${className}`}>
       <a
         href={CHECKOUT_URL}
-        onClick={trackCheckoutStart}
+        onClick={handleCheckoutClick}
         className="cta-pulse inline-flex min-h-14 w-full max-w-xl items-center justify-center rounded-2xl bg-success px-4 py-4 text-center text-base font-black uppercase leading-snug text-success-foreground transition hover:brightness-110 sm:px-6 sm:py-5 sm:text-xl"
       >
         {children}
@@ -392,7 +403,7 @@ function Index() {
       </div>
 
       {showSticky && <div className="mobile-offer-bar fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 px-4 pt-3 backdrop-blur-sm sm:hidden">
-        <a href={CHECKOUT_URL} onClick={trackCheckoutStart} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-success px-4 py-3 text-center text-sm font-black uppercase text-success-foreground">
+        <a href={CHECKOUT_URL} onClick={handleCheckoutClick} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-success px-4 py-3 text-center text-sm font-black uppercase text-success-foreground">
           Quero Minhas Receitas
         </a>
       </div>}
