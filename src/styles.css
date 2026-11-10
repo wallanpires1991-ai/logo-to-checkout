@@ -152,6 +152,21 @@
   50% { transform: translateY(-12px) rotate(1deg); }
 }
 
+.mobile-offer-bar {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 639px) {
+  .float-soft { animation: none; }
+  .cta-pulse { animation: none; }
+  html { scroll-padding-bottom: 90px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-soft, .cta-pulse { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

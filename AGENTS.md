@@ -28,3 +28,5 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep mobile purchase navigation hidden while the opening section or offer is visible, and suppress sales popups on mobile, so floating controls do not cover primary purchase content.
