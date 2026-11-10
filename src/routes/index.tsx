@@ -6,7 +6,8 @@ import {
 } from "lucide-react";
 import logoSrc from "@/assets/vovo-dita-logo-leve.jpg";
 const logo = { url: logoSrc };
-import openingImage from "@/assets/vovo-dita-hero-sem-fundo.png.asset.json";
+import openingImageSrc from "@/assets/vovo-dita-hero-bege.jpg";
+const openingImage = { url: openingImageSrc };
 import offerImageSrc from "@/assets/vovo-dita-oferta-leve.jpg";
 const offerImage = { url: offerImageSrc };
 import { ProductImage } from "@/components/product-image";
