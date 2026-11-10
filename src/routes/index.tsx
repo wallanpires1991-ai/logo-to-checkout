@@ -5,6 +5,7 @@ import {
   Lock, Check, ChevronDown, Flame, Clock, Drumstick, Cake, Beef, Salad, Croissant, Fish, Heart,
 } from "lucide-react";
 import logo from "@/assets/vovo-dita-logo.png.asset.json";
+import openingImage from "@/assets/vovo-dita-receitas-inicio.png.asset.json";
 import camila from "@/assets/camila.jpg";
 import juliana from "@/assets/juliana.jpg";
 import beatriz from "@/assets/beatriz.jpg";
@@ -20,9 +21,9 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "150 receitas caseiras + 30 fitness de brinde. O sabor da vovó, com a praticidade da Air Fryer." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      ...(logo.url.startsWith("https://") ? [
-        { property: "og:image", content: logo.url },
-        { name: "twitter:image", content: logo.url },
+      ...(openingImage.url.startsWith("https://") ? [
+        { property: "og:image", content: openingImage.url },
+        { name: "twitter:image", content: openingImage.url },
       ] : []),
     ],
   }),
@@ -185,11 +186,11 @@ function Index() {
           </div>
           <CTA className="mt-6 sm:mt-8 lg:items-start" />
         </div>
-        <div className="relative order-1 mx-auto w-full max-w-[13rem] sm:max-w-md lg:order-2">
+        <div className="relative order-1 mx-auto w-full max-w-md lg:order-2 lg:max-w-xl">
           <div className="float-soft relative will-change-transform">
-            <img src={logo.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" className="aspect-square w-full rounded-2xl object-cover shadow-2xl sm:rounded-[2rem]" />
+            <img src={openingImage.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" width={1366} height={768} className="aspect-[1366/768] h-auto w-full object-contain" />
           </div>
-          <div className="absolute -right-2 top-3 rotate-6 rounded-xl bg-accent px-3 py-2 text-center font-display text-sm font-black leading-tight text-accent-foreground shadow-lg sm:right-1 sm:top-6 sm:rounded-2xl sm:px-4 sm:text-base">
+          <div className="relative mx-auto mt-3 w-fit rounded-xl bg-accent px-3 py-2 text-center font-display text-sm font-black leading-tight text-accent-foreground shadow-lg sm:px-4 sm:text-base">
             <span className="block text-xs uppercase">de R$97</span>por R$17,97
           </div>
         </div>
