@@ -21,6 +21,10 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "150 receitas caseiras + 30 fitness de brinde. O sabor da vovó, com a praticidade da Air Fryer." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      ...(logo.url.startsWith("https://") ? [
+        { property: "og:image", content: logo.url },
+        { name: "twitter:image", content: logo.url },
+      ] : []),
     ],
   }),
   component: Index,
@@ -31,11 +35,11 @@ function CTA({ children = "QUERO GARANTIR MEU CADERNINHO AGORA", className = "" 
     <div className={`flex flex-col items-center gap-3 ${className}`}>
       <a
         href={CHECKOUT_URL}
-        className="cta-pulse inline-flex w-full max-w-xl items-center justify-center rounded-2xl bg-success px-6 py-5 text-center text-lg font-black uppercase tracking-wide text-success-foreground transition hover:brightness-110 sm:text-xl"
+        className="cta-pulse inline-flex min-h-14 w-full max-w-xl items-center justify-center rounded-2xl bg-success px-4 py-4 text-center text-base font-black uppercase leading-snug text-success-foreground transition hover:brightness-110 sm:px-6 sm:py-5 sm:text-xl"
       >
         {children}
       </a>
-      <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm font-bold text-muted-foreground">
+      <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs font-bold text-muted-foreground sm:text-sm">
         <span className="flex items-center gap-1"><Check className="h-4 w-4 text-success" /> Acesso Imediato</span>
         <span className="flex items-center gap-1"><Lock className="h-4 w-4 text-success" /> Compra 100% Segura</span>
       </p>
@@ -45,9 +49,9 @@ function CTA({ children = "QUERO GARANTIR MEU CADERNINHO AGORA", className = "" 
 
 function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
   return (
-    <div className="mx-auto mb-10 max-w-2xl text-center">
-      <p className="mb-2 text-sm font-black uppercase tracking-[0.2em] text-primary">{kicker}</p>
-      <h2 className="font-display text-3xl font-extrabold leading-tight text-secondary sm:text-4xl">{title}</h2>
+    <div className="mx-auto mb-7 max-w-2xl text-center sm:mb-10">
+      <p className="mb-2 text-xs font-black uppercase text-primary sm:text-sm">{kicker}</p>
+      <h2 className="text-balance font-display text-2xl font-extrabold leading-tight text-secondary sm:text-4xl">{title}</h2>
     </div>
   );
 }
@@ -98,10 +102,10 @@ function SalesPopup() {
     }, 6000);
     return () => { clearTimeout(first); clearInterval(iv); };
   }, []);
-  const [name, city] = buyers[i]!;
+  const [name, city] = buyers[i] ?? buyers[0] ?? ["", ""];
   const mins = (i % 6) + 1;
   return (
-    <div className={`fixed bottom-24 left-3 z-40 max-w-[18rem] transition-all duration-500 sm:bottom-5 sm:left-5 ${show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}>
+    <div className={`fixed bottom-5 left-5 z-40 hidden max-w-[18rem] transition-all duration-500 sm:block ${show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}>
       <div className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-xl">
         <img src={logo.url} alt="" className="h-11 w-11 shrink-0 rounded-xl object-cover object-top" />
         <div className="min-w-0 text-sm leading-tight">
@@ -123,10 +127,9 @@ function Countdown() {
   const m = String(Math.floor(left / 60)).padStart(2, "0");
   const s = String(left % 60).padStart(2, "0");
   return (
-    <div className="flex items-center justify-center gap-3">
-      <Clock className="h-5 w-5 text-accent" />
-      <span className="text-sm font-bold uppercase tracking-wider">Oferta expira em</span>
-      <div className="flex gap-1 font-display text-2xl font-black tabular-nums">
+    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:flex sm:justify-center sm:gap-3">
+      <span className="flex min-w-0 items-center gap-2 text-xs font-bold uppercase sm:text-sm"><Clock className="h-4 w-4 shrink-0 text-accent sm:h-5 sm:w-5" />Oferta expira em</span>
+      <div className="flex shrink-0 items-center gap-1 font-display text-xl font-black tabular-nums sm:text-2xl">
         <span className="rounded-lg bg-accent px-2 py-1 text-accent-foreground">{m}</span>:
         <span className="rounded-lg bg-accent px-2 py-1 text-accent-foreground">{s}</span>
       </div>
@@ -136,61 +139,78 @@ function Countdown() {
 
 function Index() {
   const [open, setOpen] = useState<number | null>(0);
+  const [showMobileOffer, setShowMobileOffer] = useState(false);
+  useEffect(() => {
+    const hero = document.getElementById("inicio");
+    const offer = document.getElementById("oferta");
+    if (!hero || !offer) return;
+    let heroVisible = true;
+    let offerVisible = false;
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === hero) heroVisible = entry.isIntersecting;
+        if (entry.target === offer) offerVisible = entry.isIntersecting;
+      }
+      setShowMobileOffer(!heroVisible && !offerVisible);
+    });
+    observer.observe(hero);
+    observer.observe(offer);
+    return () => observer.disconnect();
+  }, []);
   return (
     <div className="paper min-h-screen overflow-x-hidden">
       {/* Badge */}
-      <div className="bg-secondary px-4 py-2.5 text-center text-sm font-extrabold text-secondary-foreground sm:text-base">
+      <div className="bg-secondary px-4 py-2.5 text-center text-xs font-extrabold leading-relaxed text-secondary-foreground sm:text-base">
         🔥 Fenômeno no Brasil: Mais de <span className="text-accent">10.000 unidades vendidas</span> nos últimos 5 dias!
       </div>
 
       {/* Hero */}
-      <section className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-5 pb-16 pt-10 lg:grid-cols-[1.1fr_1fr] lg:pt-16">
+      <section id="inicio" className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-6 px-5 pb-10 pt-6 sm:gap-10 sm:pb-16 sm:pt-10 lg:grid-cols-[1.1fr_1fr] lg:pt-16">
         <div className="order-2 min-w-0 text-center lg:order-1 lg:text-left">
-          <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-black uppercase tracking-wider text-primary">
+          <span className="inline-block text-balance rounded-full bg-primary/10 px-4 py-1.5 text-xs font-black uppercase text-primary sm:text-sm">
             O Segredo da Cozinha Prática e Saborosa
           </span>
-          <h1 className="mt-5 font-display text-[2rem] font-black leading-[1.1] text-secondary sm:text-5xl">
+          <h1 className="mt-4 text-balance font-display text-[1.625rem] font-black leading-[1.15] text-secondary sm:mt-5 sm:text-5xl">
             Transforme sua Air Fryer na sua <span className="text-primary">melhor aliada</span>: 150 Receitas Caseiras Irresistíveis{" "}
             <span className="relative inline">
               <span className="rounded bg-accent/70 px-1 [box-decoration-break:clone]">+ 30 Fitness de Brinde!</span>
               <span className="hidden" />
             </span>
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground lg:mx-0">
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-5 sm:text-lg lg:mx-0">
             Resgate o verdadeiro sabor da comida caseira da vovó, de forma super prática, rápida e sem sujeira na cozinha.
           </p>
-          <div className="mt-6 flex items-center justify-center gap-2 lg:justify-start">
-            <div className="flex">{[camila, juliana, beatriz].map((s) => <img key={s} src={s} alt="" className="-ml-2 h-9 w-9 rounded-full border-2 border-card object-cover first:ml-0" />)}</div>
-            <div className="text-left text-sm"><div className="flex text-accent">{Array.from({ length: 5 }).map((_, k) => <Star key={k} className="h-4 w-4 fill-current" />)}</div><span className="font-bold text-secondary">4,9/5 de +10 mil cozinheiras</span></div>
+          <div className="mx-auto mt-4 grid w-fit max-w-full grid-cols-[auto_minmax(0,1fr)] items-center gap-2 sm:mt-6 lg:mx-0">
+            <div className="flex shrink-0">{[camila, juliana, beatriz].map((s) => <img key={s} src={s} alt="" className="-ml-2 h-8 w-8 shrink-0 rounded-full border-2 border-card object-cover first:ml-0 sm:h-9 sm:w-9" />)}</div>
+            <div className="min-w-0 text-left text-xs sm:text-sm"><div className="flex text-accent">{Array.from({ length: 5 }).map((_, k) => <Star key={k} className="h-4 w-4 fill-current" />)}</div><span className="font-bold text-secondary">4,9/5 de +10 mil cozinheiras</span></div>
           </div>
-          <CTA className="mt-8 lg:items-start" />
+          <CTA className="mt-6 sm:mt-8 lg:items-start" />
         </div>
-        <div className="relative order-1 mx-auto w-full max-w-md lg:order-2">
-          <div className="absolute inset-6 rounded-full bg-primary/25 blur-3xl" />
+        <div className="relative order-1 mx-auto w-full max-w-[13rem] sm:max-w-md lg:order-2">
           <div className="float-soft relative will-change-transform">
-            <img src={logo.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" className="w-full rounded-[2rem] shadow-2xl" />
+            <img src={logo.url} alt="Caderninho de Receitas da Vovó Dita para Air Fryer" className="aspect-square w-full rounded-2xl object-cover shadow-2xl sm:rounded-[2rem]" />
           </div>
-          <div className="absolute right-1 top-6 rotate-6 rounded-2xl bg-accent px-4 py-2 text-center font-display font-black leading-tight text-accent-foreground shadow-lg">
+          <div className="absolute -right-2 top-3 rotate-6 rounded-xl bg-accent px-3 py-2 text-center font-display text-sm font-black leading-tight text-accent-foreground shadow-lg sm:right-1 sm:top-6 sm:rounded-2xl sm:px-4 sm:text-base">
             <span className="block text-xs uppercase">de R$97</span>por R$17,97
           </div>
         </div>
       </section>
 
       {/* Pillars */}
-      <section className="gingham py-10">
+      <section className="gingham py-7 sm:py-10">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-5 lg:grid-cols-4">
           {pillars.map(({ icon: I, t, d }) => (
-            <div key={t} className="rounded-2xl bg-card p-5 text-center shadow-lg">
+            <div key={t} className="min-w-0 rounded-2xl bg-card px-3 py-4 text-center shadow-lg sm:p-5">
               <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-primary text-primary-foreground"><I className="h-6 w-6" /></div>
-              <h3 className="font-extrabold text-secondary">{t}</h3>
-              <p className="text-sm text-muted-foreground">{d}</p>
+              <h3 className="text-sm font-extrabold leading-snug text-secondary sm:text-base">{t}</h3>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{d}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Content */}
-      <section className="mx-auto max-w-6xl px-5 py-20">
+      <section className="mx-auto max-w-6xl px-5 py-12 sm:py-20">
         <SectionTitle kicker="O que tem dentro" title="180 receitas que vão virar as queridinhas da sua casa" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {cats.map(({ icon: I, t, d, bonus }) => (
@@ -206,7 +226,7 @@ function Index() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-muted py-20">
+      <section className="bg-muted py-12 sm:py-20">
         <div className="mx-auto max-w-6xl px-5">
           <SectionTitle kicker="Quem já tem, ama" title="Olha o que nossas clientes estão dizendo" />
           <div className="grid gap-5 md:grid-cols-3">
@@ -225,11 +245,11 @@ function Index() {
       </section>
 
       {/* Bonus */}
-      <section className="mx-auto max-w-4xl px-5 py-20">
-        <div className="relative overflow-hidden rounded-[2rem] border-4 border-dashed border-accent bg-card p-8 text-center sm:p-12">
+      <section className="mx-auto max-w-4xl px-5 py-12 sm:py-20">
+        <div className="relative overflow-hidden rounded-[2rem] border-4 border-dashed border-accent bg-card px-5 py-7 text-center sm:p-12">
           <Gift className="mx-auto mb-4 h-14 w-14 text-primary" />
           <p className="text-sm font-black uppercase tracking-[0.2em] text-primary">Super bônus exclusivo</p>
-          <h2 className="mt-2 font-display text-3xl font-black text-secondary sm:text-4xl">+ 30 Receitas Fitness para Air Fryer</h2>
+          <h2 className="mt-2 text-balance font-display text-2xl font-black text-secondary sm:text-4xl">+ 30 Receitas Fitness para Air Fryer</h2>
           <p className="mt-3 text-muted-foreground">Refeições leves, gostosas e rápidas para comer sem culpa — sem abrir mão do sabor.</p>
           <p className="mt-6 font-display text-2xl font-black">
             <span className="text-muted-foreground line-through decoration-primary decoration-2">De R$ 97,00</span>{" "}
@@ -239,10 +259,10 @@ function Index() {
       </section>
 
       {/* Offer */}
-      <section id="oferta" className="gingham scroll-mt-4 px-5 py-20">
+      <section id="oferta" className="gingham scroll-mt-4 px-4 py-12 sm:px-5 sm:py-20">
         <div className="mx-auto max-w-lg overflow-hidden rounded-[2rem] bg-card shadow-2xl">
-          <div className="bg-secondary px-6 py-4 text-secondary-foreground"><Countdown /></div>
-          <div className="p-7 text-center sm:p-9">
+          <div className="bg-secondary px-4 py-4 text-secondary-foreground sm:px-6"><Countdown /></div>
+          <div className="px-5 py-6 text-center sm:p-9">
             <img src={logo.url} alt="" loading="lazy" className="mx-auto -mt-2 w-44 rounded-2xl shadow-lg" />
             <ul className="mx-auto mt-6 space-y-3 text-left">
               {["E-book com 150 Receitas Caseiras da Vovó", "Bônus: 30 Receitas Fitness para Air Fryer", "Acesso Vitalício + Atualizações", "Leia no celular ou imprima em casa", "Garantia incondicional de 7 dias"].map((x) => (
@@ -255,13 +275,13 @@ function Index() {
               <p className="text-sm font-bold text-muted-foreground">pagamento único · menos que uma pizza 🍕</p>
             </div>
             <CTA>QUERO MEU CADERNINHO AGORA</CTA>
-            <div className="mt-5 flex items-center justify-center gap-2 text-xs font-bold text-muted-foreground"><ShieldCheck className="h-4 w-4 text-success" /> Pix · Cartão · Ambiente criptografado</div>
+            <div className="mt-5 flex items-center justify-center gap-2 text-xs font-bold text-muted-foreground"><ShieldCheck className="h-4 w-4 shrink-0 text-success" /><span>Pix · Cartão · Ambiente criptografado</span></div>
           </div>
         </div>
       </section>
 
       {/* Guarantee */}
-      <section className="mx-auto flex max-w-4xl flex-col items-center gap-8 px-5 py-20 text-center md:flex-row md:text-left">
+      <section className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-5 py-12 text-center sm:py-20 md:flex-row md:gap-8 md:text-left">
         <div className="grid h-40 w-40 shrink-0 place-items-center rounded-full border-8 border-double border-accent bg-primary text-primary-foreground shadow-xl">
           <div className="text-center leading-none"><ShieldCheck className="mx-auto h-8 w-8" /><p className="font-display text-5xl font-black">7</p><p className="text-xs font-black uppercase tracking-widest">dias de garantia</p></div>
         </div>
@@ -272,7 +292,7 @@ function Index() {
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-3xl px-5 pb-20">
+      <section className="mx-auto max-w-3xl px-5 pb-12 sm:pb-20">
         <SectionTitle kicker="Dúvidas" title="Perguntas frequentes" />
         <div className="space-y-3">
           {faqs.map((f, k) => (
@@ -293,7 +313,7 @@ function Index() {
       <footer className="bg-secondary px-5 pb-28 pt-12 text-center text-secondary-foreground sm:pb-12">
         <img src={logo.url} alt="Vovó Dita" loading="lazy" className="mx-auto w-28 rounded-2xl" />
         <p className="mt-4 flex items-center justify-center gap-1 font-bold">Feito com <Heart className="h-4 w-4 fill-primary text-primary" /> pela Vovó Dita</p>
-        <div className="mt-4 flex justify-center gap-4 text-xs font-bold opacity-80">
+        <div className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs font-bold opacity-80">
           <span className="flex items-center gap-1"><Lock className="h-3.5 w-3.5" /> Site seguro</span>
           <span className="flex items-center gap-1"><ShieldCheck className="h-3.5 w-3.5" /> Garantia 7 dias</span>
           <span className="flex items-center gap-1"><Flame className="h-3.5 w-3.5" /> Acesso imediato</span>
@@ -305,9 +325,11 @@ function Index() {
 
       <SalesPopup />
 
-      <a href="#oferta" className="fixed bottom-4 right-4 z-50 rounded-full bg-primary px-5 py-3.5 text-sm font-black uppercase text-primary-foreground shadow-2xl sm:hidden">
-        Quero Minhas Receitas
-      </a>
+      {showMobileOffer && <div className="mobile-offer-bar fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 px-4 pt-3 backdrop-blur-sm sm:hidden">
+        <a href="#oferta" className="flex min-h-12 w-full items-center justify-center rounded-xl bg-success px-4 py-3 text-center text-sm font-black uppercase text-success-foreground">
+          Quero Minhas Receitas
+        </a>
+      </div>}
     </div>
   );
 }
