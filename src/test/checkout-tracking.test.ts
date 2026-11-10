@@ -1,10 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { MouseEvent } from "react";
 
 import { handleCheckoutClick, trackCheckoutStart } from "@/routes/index";
 
 const CHECKOUT = "https://pay.cakto.com.br/uio4pcd_1304273";
 
-function clickEvent(init: Partial<React.MouseEvent<HTMLAnchorElement>> = {}) {
+function clickEvent(init: Partial<MouseEvent<HTMLAnchorElement>> = {}) {
   const preventDefault = vi.fn();
   return {
     event: {
@@ -16,7 +17,7 @@ function clickEvent(init: Partial<React.MouseEvent<HTMLAnchorElement>> = {}) {
       altKey: false,
       preventDefault,
       ...init,
-    } as unknown as React.MouseEvent<HTMLAnchorElement>,
+    } as unknown as MouseEvent<HTMLAnchorElement>,
     preventDefault,
   };
 }
